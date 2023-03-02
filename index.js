@@ -75,22 +75,16 @@ function getAuthToken(callback) {
 
 		var options = {
 			url: 'https://api.redoxengine.com/v2/auth/token',
-			//url: 'https://api.redoxengine.com/auth/authenticate',
 			method: 'POST',
-			//body: {
-				//apiKey: SOURCE_API_KEY,
-				//secret: SOURCE_SECRET
-			//},
 		      body: {
         			mode: 'urlencoded',
         			urlencoded: [
           			{ key: 'grant_type', value: 'client_credentials', disabled: false },
-          			{ key: 'client_assertion_type', value: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", disabled: false },
+          			{ key: 'client_assertion_type', value: 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer', disabled: false },
           			{ key: 'client_assertion', value: CLIENT_ASSERTION, disabled: false }
         			]
       		},
- 
-			headers: {
+ 			headers: {
 				'Content-Type': 'x-www-form-urlencoded'
 				//'Content-Type': 'application/json'
 			},
@@ -100,8 +94,8 @@ function getAuthToken(callback) {
 		request.post(options, function (err, response, body) {
 			console.log(body);
 
-			authToken = body.accessToken;
-			authTokenExpires = body.expires;
+			authToken = body.access_token;
+			authTokenExpires = body.expires_in;
 
 			callback(authToken);
 		});
