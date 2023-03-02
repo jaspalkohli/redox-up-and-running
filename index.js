@@ -4,8 +4,12 @@ var bodyParser = require('body-parser');
 var request = require('request');
 
 var DESTINATION_VERIFICATION_TOKEN = 'REPLACE_THIS';
-var SOURCE_API_KEY = 'REPLACE_THIS';
-var SOURCE_SECRET = 'REPLACE_THIS';
+//var SOURCE_API_KEY = 'REPLACE_THIS';
+//var SOURCE_SECRET = 'REPLACE_THIS';
+var CLIENT_ASSERTION = 'REPLACE_THIS';
+var GRANT_TYPE = 'client_credentials';
+var CLIENT_ASSERTION_TYPE = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer';
+
 var authToken, authTokenExpires;
 
 var lowdb = require('lowdb');
@@ -75,8 +79,11 @@ function getAuthToken(callback) {
 			url: 'https://api.redoxengine.com/auth/authenticate',
 			method: 'POST',
 			body: {
-				apiKey: SOURCE_API_KEY,
-				secret: SOURCE_SECRET
+				grant_type: GRANT_TYPE,
+				client_assertion_type: CLIENT_ASSERTION_TYPE,
+				client_assertion : CLIENT_ASSERTION
+				//apiKey: SOURCE_API_KEY,
+				//secret: SOURCE_SECRET
 			}, 
 			headers: {
 				'Content-Type': 'application/json'
