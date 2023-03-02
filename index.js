@@ -7,8 +7,6 @@ var DESTINATION_VERIFICATION_TOKEN = 'REPLACE_THIS';
 //var SOURCE_API_KEY = 'REPLACE_THIS';
 //var SOURCE_SECRET = 'REPLACE_THIS';
 var CLIENT_ASSERTION = 'REPLACE_THIS';
-var GRANT_TYPE = 'client_credentials';
-var CLIENT_ASSERTION_TYPE = 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer';
 
 var authToken, authTokenExpires;
 
@@ -76,17 +74,25 @@ function getAuthToken(callback) {
 		//get new token
 
 		var options = {
-			url: 'https://api.redoxengine.com/auth/authenticate',
+			url: 'https://api.redoxengine.com/v2/auth/token',
+			//url: 'https://api.redoxengine.com/auth/authenticate',
 			method: 'POST',
-			body: {
-				grant_type: GRANT_TYPE,
-				client_assertion_type: CLIENT_ASSERTION_TYPE,
-				client_assertion : CLIENT_ASSERTION
+			//body: {
 				//apiKey: SOURCE_API_KEY,
 				//secret: SOURCE_SECRET
-			}, 
+			//},
+		      body: {
+        			mode: 'urlencoded',
+        			urlencoded: [
+          			{ key: 'grant_type', value: 'client_credentials', disabled: false },
+          			{ key: 'client_assertion_type', value: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer", disabled: false },
+          			{ key: 'client_assertion', value: CLIENT_ASSERTION, disabled: false }
+        			]
+      		},
+ 
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'x-www-form-urlencoded'
+				//'Content-Type': 'application/json'
 			},
 			json: true
 		};
