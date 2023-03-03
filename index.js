@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 
+
 var DESTINATION_VERIFICATION_TOKEN = 'REPLACE_THIS';
 //var SOURCE_API_KEY = 'REPLACE_THIS';
 //var SOURCE_SECRET = 'REPLACE_THIS';
@@ -86,7 +87,6 @@ function getAuthToken(callback) {
       		},
  			headers: {
 				'Content-Type': 'x-www-form-urlencoded'
-				//'Content-Type': 'application/json'
 			},
 			json: true
 		};
